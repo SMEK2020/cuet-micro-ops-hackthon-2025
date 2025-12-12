@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 # docker/compose.dev.yml
+=======
+version: "3.9"
+
+>>>>>>> 80ef281d1b85a23afb4f9454de2379812e3e1583
 services:
-  delineate-app:
+  app:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.dev
+<<<<<<< HEAD
     env_file:
       - ../.env
     command: >
@@ -65,3 +71,36 @@ volumes:
 
 networks:
   appnet:
+=======
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      S3_REGION: us-east-1
+      S3_ENDPOINT: http://minio:9000
+      S3_ACCESS_KEY_ID: minioadmin
+      S3_SECRET_ACCESS_KEY: minioadmin
+      S3_BUCKET_NAME: downloads
+      S3_FORCE_PATH_STYLE: "true"
+      DOWNLOAD_DELAY_ENABLED: "true"
+      DOWNLOAD_DELAY_MIN_MS: 5000
+      DOWNLOAD_DELAY_MAX_MS: 15000
+      REQUEST_TIMEOUT_MS: 30000
+      RATE_LIMIT_WINDOW_MS: 60000
+      RATE_LIMIT_MAX_REQUESTS: 100
+      CORS_ORIGINS: "*"
+    depends_on:
+      - minio
+    command: >
+      node --experimental-transform-types --watch src/index.ts
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data
+>>>>>>> 80ef281d1b85a23afb4f9454de2379812e3e1583
