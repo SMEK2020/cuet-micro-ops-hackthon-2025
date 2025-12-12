@@ -44,10 +44,10 @@ jobs:
           NODE_ENV: development
           PORT: 3000
           S3_REGION: us-east-1
-          S3_BUCKET_NAME: "sazid1234"
+          S3_BUCKET_NAME: ""
           S3_FORCE_PATH_STYLE: "true"
-          SENTRY_DSN: "sazid1234"
-          OTEL_EXPORTER_OTLP_ENDPOINT: "sazid1234"
+          SENTRY_DSN: ""
+          OTEL_EXPORTER_OTLP_ENDPOINT: ""
           REQUEST_TIMEOUT_MS: "30000"
           RATE_LIMIT_WINDOW_MS: "60000"
           RATE_LIMIT_MAX_REQUESTS: "100"

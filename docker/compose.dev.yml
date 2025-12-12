@@ -6,7 +6,7 @@ services:
       context: ..
       dockerfile: docker/Dockerfile.dev
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - ../src:/app/src
     env_file:
@@ -24,3 +24,45 @@ services:
       - "4318:4318"
     environment:
       - COLLECTOR_OTLP_ENABLED=true
+  # rustfs:
+  #   image: rustfs/rustfs:latest
+  #   container_name: rustfs
+  #   restart: unless-stopped
+  #   environment:
+  #     RUSTFS_ACCESS_KEY: minioadmin
+  #     RUSTFS_SECRET_KEY: minioadmin
+  #   ports:
+  #     - "9000:9000"   # S3 API
+  #     - "9001:9001"   # Console / web UI 
+  #   volumes:
+  #     - ./rustfs-data:/data
+  #     - ./rustfs-logs:/logs
+
+  # rustfs:
+  #   image: rustfs/rustfs:latest
+  #   environment:
+  #     RUSTFS_ACCESS_KEY: minioadmin
+  #     RUSTFS_SECRET_KEY: minioadmin
+  #   ports:
+  #     - "9000:9000"
+  #     - "9001:9001"
+  #   volumes:
+  #     - ./rustfs-data:/data
+  #     - ./rustfs-logs:/logs
+
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: rustfs
+    restart: unless-stopped
+    environment:
+      RUSTFS_ACCESS_KEY: minioadmin
+      RUSTFS_SECRET_KEY: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./rustfs-data:/data
+      - ./rustfs-logs:/logs
+
+  
+
